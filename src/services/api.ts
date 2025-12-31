@@ -1,8 +1,11 @@
 import axios, { AxiosError } from 'axios'
 import type { ApiResponse, AuthResponse, User, Skill, Goal, Plan, Application, Feedback, FeedbackAnalysis, LearningPriority, FeedbackPattern, FeedbackAnalysisRequest, DashboardData, Opportunity, Resume, ResumeMatchAnalysis } from '../types'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
-const PYTHON_API_URL = import.meta.env.VITE_PYTHON_API_URL || 'http://localhost:8000'
+// Remove trailing slashes from URLs to prevent double slashes
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
+const PYTHON_API_URL = (import.meta.env.VITE_PYTHON_API_URL || 'http://localhost:5000').replace(/\/$/, '')
+
+console.log('API Configuration:', { API_BASE_URL, PYTHON_API_URL })
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -16,8 +19,12 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('auth_token')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
+  } else {
+    console.warn('No auth token found in localStorage')
   }
   return config
+}, (error) => {
+  return Promise.reject(error)
 })
 
 // Handle responses
@@ -732,8 +739,3 @@ export const projectsApi = {
 }
 
 export default api
-
-
-
-
-
