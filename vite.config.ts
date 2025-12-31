@@ -7,10 +7,11 @@ export default defineConfig({
     port: 3001,
     proxy: {
       '/api': {
-        target: 'https://new.svcr.dev',
+        target: 'https://new.svcr.dev/api',
         changeOrigin: true,
       }
     }
   }
 })
+
 
