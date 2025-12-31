@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, Lock } from 'lucide-react';
 
 // --- Components ---
@@ -95,11 +95,11 @@ const Login = () => {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
