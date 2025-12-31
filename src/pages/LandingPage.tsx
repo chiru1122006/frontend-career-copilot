@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Sparkles, ArrowRight, Lock } from 'lucide-react';
+
+// --- Type Definitions ---
+
+interface NavigationProps {
+  onNavigate: (page: string) => void;
+}
 
 // --- Landing Page Component (Primary) ---
 
-const LandingPage = ({ onNavigate }) => {
+const LandingPage = ({ onNavigate }: NavigationProps) => {
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center p-6 text-center">
       
@@ -41,7 +47,7 @@ const LandingPage = ({ onNavigate }) => {
 
 // --- Login Component (Demo) ---
 
-const Login = ({ onNavigate }) => {
+const Login = ({ onNavigate }: NavigationProps) => {
   return (
     <div className="min-h-screen bg-stone-50 flex items-center justify-center p-4">
       {/* Login Card */}
@@ -98,7 +104,7 @@ const Login = ({ onNavigate }) => {
 // --- App Container (Wraps Landing Page for Preview) ---
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('landing');
+  const [currentPage, setCurrentPage] = useState<string>('landing');
 
   return (
     <>
