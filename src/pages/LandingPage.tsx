@@ -1,10 +1,10 @@
-import { HashRouter, Routes, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Sparkles, ArrowRight, Lock } from 'lucide-react';
 
 // --- Components ---
 
-// Simplified Landing Page - "Remove all content and keep only login"
-const LandingPage = () => {
+// Simplified Landing Page
+const LandingPage = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center p-6 text-center">
       
@@ -15,13 +15,13 @@ const LandingPage = () => {
 
       {/* Main Action: Login Button */}
       {/* Design: Solid black button with white text for high contrast */}
-      <Link 
-        to="/login" 
-        className="group px-10 py-3.5 bg-black text-white rounded-lg font-bold text-lg hover:bg-stone-800 transition-all duration-300 flex items-center gap-3 shadow-lg shadow-stone-900/20"
+      <button 
+        onClick={() => onNavigate('login')}
+        className="group px-10 py-3.5 bg-black text-white rounded-lg font-bold text-lg hover:bg-stone-800 transition-all duration-300 flex items-center gap-3 shadow-lg shadow-stone-900/20 cursor-pointer"
       >
         Login
         <ArrowRight className="w-5 h-5 opacity-70 group-hover:translate-x-1 group-hover:opacity-100 transition-all" />
-      </Link>
+      </button>
 
       {/* Spacer */}
       <div className="h-12"></div>
@@ -40,7 +40,7 @@ const LandingPage = () => {
   );
 };
 
-const Login = () => {
+const Login = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-stone-50 flex items-center justify-center p-4">
       {/* Login Card */}
@@ -75,16 +75,19 @@ const Login = () => {
           </div>
           <button 
             type="submit"
-            className="w-full bg-black hover:bg-stone-800 text-white font-bold py-3 rounded-lg transition-colors mt-2 shadow-lg shadow-stone-900/10"
+            className="w-full bg-black hover:bg-stone-800 text-white font-bold py-3 rounded-lg transition-colors mt-2 shadow-lg shadow-stone-900/10 cursor-pointer"
           >
             Continue
           </button>
         </form>
 
         <div className="mt-6 text-center">
-            <Link to="/" className="text-sm text-stone-500 hover:text-stone-900 transition-colors font-semibold">
+            <button 
+                onClick={() => onNavigate('landing')}
+                className="text-sm text-stone-500 hover:text-stone-900 transition-colors font-semibold cursor-pointer"
+            >
                 ← Back to Home
-            </Link>
+            </button>
         </div>
       </div>
     </div>
@@ -94,12 +97,13 @@ const Login = () => {
 // --- Main App Component ---
 
 export default function App() {
+  // Using State-based routing to prevent preview environment crashes
+  const [currentPage, setCurrentPage] = useState('landing');
+
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </HashRouter>
+    <>
+      {currentPage === 'landing' && <LandingPage onNavigate={setCurrentPage} />}
+      {currentPage === 'login' && <Login onNavigate={setCurrentPage} />}
+    </>
   );
 }
