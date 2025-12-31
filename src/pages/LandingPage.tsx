@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Sparkles, ArrowRight, Lock } from 'lucide-react';
 
-// --- Components ---
+// --- Landing Page Component (Primary) ---
 
-// Simplified Landing Page
 const LandingPage = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center p-6 text-center">
@@ -39,6 +38,8 @@ const LandingPage = ({ onNavigate }) => {
     </div>
   );
 };
+
+// --- Login Component (Demo) ---
 
 const Login = ({ onNavigate }) => {
   return (
@@ -94,10 +95,9 @@ const Login = ({ onNavigate }) => {
   );
 };
 
-// --- Main App Component ---
+// --- App Container (Wraps Landing Page for Preview) ---
 
 export default function App() {
-  // Using State-based routing to prevent preview environment crashes
   const [currentPage, setCurrentPage] = useState('landing');
 
   return (
