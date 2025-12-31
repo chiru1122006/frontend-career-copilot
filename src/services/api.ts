@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 import type { ApiResponse, AuthResponse, User, Skill, Goal, Plan, Application, Feedback, FeedbackAnalysis, LearningPriority, FeedbackPattern, FeedbackAnalysisRequest, DashboardData, Opportunity, Resume, ResumeMatchAnalysis } from '../types'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
-const PYTHON_API_URL = import.meta.env.VITE_PYTHON_API_URL || 'http://localhost:5000'
+const PYTHON_API_URL = import.meta.env.VITE_PYTHON_API_URL || 'http://localhost:8000'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -732,3 +732,4 @@ export const projectsApi = {
 }
 
 export default api
+
